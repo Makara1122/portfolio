@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { agbalumo } from "@/components/fonts/fonts";
 import "@/app/globals.css";
-
-
+import Navbar from "@/components/navbar/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,8 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${agbalumo.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${agbalumo.variable} antialiased
+        bg-[#FAFAFC]
+        
+        `}
       >
+       <Navbar />
+
         {children}
       </body>
     </html>
