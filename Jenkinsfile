@@ -27,6 +27,7 @@ pipeline {
         stage('Push Image to Docker Hub') {
             steps {
                 script {
+                    
                     def imageName = "mommakara026/portfolio"
 
                     echo "Login to Docker Hub"
