@@ -1,7 +1,6 @@
 pipeline {
     agent any
     environment {
-       
         DOCKER_HUB_ACCESS_TOKEN = credentials('docker-hub-access-token')
     }
     stages {
@@ -18,6 +17,9 @@ pipeline {
                         echo "Image ${imageName} does not exist."
                     }
 
+                    echo "Login to Docker Hub"
+                    sh "echo \$DOCKER_HUB_ACCESS_TOKEN | docker login -u mommakara026 --password-stdin"
+
                     echo "Building the Docker image"
                     sh "docker build --platform linux/amd64 -t ${imageName} ."
                 }
@@ -27,9 +29,7 @@ pipeline {
         stage('Push Image to Docker Hub') {
             steps {
                 script {
-                    
                     def imageName = "mommakara026/portfolio"
-
                     echo "Login to Docker Hub"
                     sh "echo \$DOCKER_HUB_ACCESS_TOKEN | docker login -u mommakara026 --password-stdin"
                     
