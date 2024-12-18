@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_HUB_ACCESS_TOKEN = credentials('dckr_pat_3Cd5ruJUj1X3aKIgzGbveqrM4jc')
+        DOCKER_HUB_ACCESS_TOKEN = credentials('docker-hub-access-token')
     }
     stages {
         stage('Build Image') {
