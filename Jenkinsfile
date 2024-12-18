@@ -1,22 +1,36 @@
 pipeline {
     agent any
+    environment {
+        DOCKER_HUB_ACCESS_TOKEN = credentials('dckr_pat_3Cd5ruJUj1X3aKIgzGbveqrM4jc')
+    }
     stages {
         stage('Build Image') {
             steps {
-                
                 script {
                     def imageName = "mommakara026/portfolio"
                     def imageExists = sh(script: "docker images -q ${imageName}", returnStdout: true).trim()
 
                     if (imageExists) {
-                        echo "Image {$imageName} already exists. Deleting it."
+                        echo "Image ${imageName} already exists. Deleting it."
                         sh "docker rmi -f ${imageName}"
                     } else {
-                        echo "Image {$imageName} does not exist."
+                        echo "Image ${imageName} does not exist."
                     }
 
                     echo "Building the Docker image"
                     sh "docker build --platform linux/amd64 -t ${imageName} ."
+                }
+            }
+        }
+
+        stage('Push Image to Docker Hub') {
+            steps {
+                script {
+                    echo "Login to Docker Hub"
+                    sh "echo \$DOCKER_HUB_ACCESS_TOKEN | docker login -u mommakara026 --password-stdin"
+                    
+                    echo "Pushing the Docker image"
+                    sh "docker push ${imageName}"
                 }
             }
         }
