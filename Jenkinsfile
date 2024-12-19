@@ -54,7 +54,7 @@ pipeline {
                 script {
                     echo "Running Ansible playbook on myserver"
                     sh """
-                    ssh -i \$SSH_KEY root@34.143.160.110 << EOF
+                    ssh  root@34.143.160.110 << EOF
                     ansible-playbook -i /root/ansible/inventory.ini /root/ansible/playbook/install_nginx.yml
                     EOF
                     """
