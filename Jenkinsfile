@@ -40,13 +40,26 @@ pipeline {
             }
         }
 
-        stage('Run ansible with shell') {
+        // stage('Run ansible with shell') {
+        //     steps {
+        //         script {
+        //             echo "Running ansible playbook to install Nginx"
+        //             sh "ansible-playbook -i /var/lib/jenkins/ansible/inventory.ini /var/lib/jenkins/ansible/playbook/install_nginx.yml"
+        //         }
+        //     }
+        //  } 
+
+        stage('Run Ansible Playbook on myserver') {
             steps {
                 script {
-                    echo "Running ansible playbook to install Nginx"
-                    sh "ansible-playbook -i /var/lib/jenkins/ansible/inventory.ini /var/lib/jenkins/ansible/playbook/install_nginx.yml"
+                    echo "Running Ansible playbook on myserver"
+                    sh """
+                    ssh -i \$SSH_KEY root@34.143.160.110 << EOF
+                    ansible-playbook -i /root/ansible/inventory.ini /root/ansible/playbook/install_nginx.yml
+                    EOF
+                    """
                 }
             }
-         } 
+        }
     }
 }
