@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     echo "Running ansible playbook to install Nginx"
-                    sh "ansible-playbook -i /root/ansible/inventory.ini /root/ansible/playbook/ping.yml"
+                    sh "ansible-playbook -i /home/jenkins/ansible/inventory.ini /home/jenkins/ansible/playbook/ping.yml"
                 }
             }
          } 
