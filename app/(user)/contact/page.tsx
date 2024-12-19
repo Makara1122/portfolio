@@ -2,7 +2,7 @@ import React from 'react'
 
 export default  async function page() {
 
-  const data = await fetch('http://localhost:8080/api/v1/users?username=makara');
+  const data = await fetch('http://34.143.160.110:8081/api/v1/users?username=olala');
   const user =  await data.json();
 
   console.log(` ============= This is user object =   ${user.username} =============`); 
