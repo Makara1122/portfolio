@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     echo "Running ansible playbook to install Nginx"
-                    sh "ansible-playbook -i /home/jenkins/ansible/inventory.ini /home/jenkins/ansible/playbook/install_nginx.yml"
+                    sh "ansible-playbook -i /var/lib/jenkins/ansible/inventory.ini /var/lib/jenkins/ansible/playbook/install_nginx.yml"
                 }
             }
          } 
