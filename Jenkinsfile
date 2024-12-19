@@ -30,6 +30,7 @@ pipeline {
             steps {
                 script {
                     def imageName = "mommakara026/portfolio"
+
                     echo "Login to Docker Hub"
                     sh "echo \$DOCKER_HUB_ACCESS_TOKEN | docker login -u mommakara026 --password-stdin"
                     
@@ -38,5 +39,14 @@ pipeline {
                 }
             }
         }
+
+        stage('Run ansible with shell') {
+            steps {
+                script {
+                    echo "Running ansible playbook to install Nginx"
+                    sh "ansible-playbook -i /root/ansible/inventory.ini /root/ansible/playbook/install_nginx.yml"
+                }
+            }
+         } 
     }
 }
